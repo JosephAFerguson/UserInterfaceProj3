@@ -2,7 +2,6 @@
   import Router from "svelte-spa-router";
 
   import Navbar from "./navbar.svelte";
-
   import Home from './home.svelte';
   import Inbox from "./inbox.svelte";
   import Bill from './bill.svelte';
