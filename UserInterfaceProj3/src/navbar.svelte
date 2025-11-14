@@ -10,19 +10,19 @@
         </a>
     </div>
     <div class="navbar-inbox">  
-        <a href="#/">
+        <a href="#/inbox">
             <img src="logo.png" alt="Logo" width="30" height="30"/>
             <p>Inbox</p>
         </a>
     </div>
     <div class="navbar-bill">  
-        <a href="#/">
+        <a href="#/bill">
             <img src="logo.png" alt="Logo" width="30" height="30"/>
             <p>Billing</p>
         </a>
     </div>
     <div class="navbar-settings"> 
-        <a href="#/"> 
+        <a href="#/settings"> 
             <img src="logo.png" alt="Logo" width="30" height="30"/>
             <p>Settings</p>
         </a>
