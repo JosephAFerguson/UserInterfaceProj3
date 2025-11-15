@@ -3,6 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --color-text-primary: #ffffff;
   --color-lm-primary: #63aae0;
   --color-lm-secondary: #012538;
   --color-lm-other: #2C2927;
@@ -23,12 +24,12 @@
   grid-template-areas:
     "content"
     "navbar-content";
-  height: 99vh;
+  height: 98vh;
   width: 40vh;
   border-radius: 3rem;
   border: 2px solid var(--color-lm-primary);
   margin: 0 auto;         
-  background-color: var(--color-lm-bg);
+  background-color: var(--color-lm-secondary);
   overflow: hidden;
 }
 

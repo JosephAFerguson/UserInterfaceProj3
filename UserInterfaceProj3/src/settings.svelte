@@ -30,10 +30,11 @@
   .settings-page {
     padding: 1.5rem;
     grid-area: content;
-    background-color: #fff;
   }
 
   .section-header {
+    color: var(--color-text-primary);
+    text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
