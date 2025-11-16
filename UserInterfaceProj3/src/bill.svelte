@@ -1,6 +1,7 @@
 <script>
     import { billingHistory } from "./stores/user";
     import { get } from "svelte/store";
+    import Icon from '@iconify/svelte';
 
     // Get store data
     let bills = get(billingHistory);
@@ -16,7 +17,8 @@
         .filter(m => bills[m]) // ensure month exists
         .map(m => ({
             name: m,
-            amount: bills[m].amount,
+            amountTotal: bills[m].amountPaid + bills[m].amountDue,
+            amountDue: bills[m].amountDue,
             status: bills[m].status
         }));
 
@@ -38,13 +40,17 @@
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <div class="bill-header" on:click={() => toggle(index)}>
                     <span>{month.name}</span>
-                    <span class="amount">${month.amount}</span>
+                    <span class="amount">${month.amountTotal}</span>
                 </div>
+                
 
                 {#if openMonth === index}
                     <div class="bill-details">
-                        <p><strong>Monthly Bill:</strong> ${month.amount}</p>
+                        <p><strong>Monthly Bill:</strong> ${month.amountTotal}</p>
                         <p>Status: {month.status}</p>
+                        {#if month.status !== "Paid"}
+                            <p>Amount Left: ${month.amountDue.toFixed(2)}</p>
+                        {/if}
                         <p class="download">Download Invoice (PDF)</p>
                     </div>
                 {/if}
@@ -52,9 +58,7 @@
         {/each}
     </div>
 
-    <div class="bill-help-button">
-        <a href="#/settings/contact">?</a>
-    </div>
+    <a class="bill-help-button" href="#/settings/contact">?</a>
 </div>
 
 <style>
@@ -68,7 +72,7 @@
     .bill-content h2{
         text-align: center;
         margin-bottom: 1rem;
-        color: var(--color-text-primary);
+        color: var(--color-text-secondary);
     }
 
     .bill-list {
@@ -77,10 +81,11 @@
     }
 
     .bill-item {
-        border: 1px solid var(--color-lm-secondary);
+        border: 1px solid var(--color-border-white);
         border-radius: 10px;
         overflow: hidden;
-        background: var(--color-lm-bg2);
+        color: var(--color-text-primary);
+        background: var(--color-background-secondary);
     }
 
     .bill-header {
@@ -88,13 +93,12 @@
         justify-content: space-between;
         padding: 0.75rem 1rem;
         cursor: pointer;
-        background: var(--color-lm-bg2);
         font-weight: bold;
         transition: background 0.2s ease;
     }
 
     .bill-header:hover {
-        background: var(--color-lm-bg2);
+        background: var(--color-border-white);
     }
 
     .bill-details {
@@ -105,20 +109,21 @@
     }
 
     .download {
-        color: var(--color-lm-primary);
+        color: var(--color-text-secondary);
         cursor: pointer;
         margin-top: 0.5rem;
     }
 
     .amount {
-        color: #333;
+        color: var(--color-lm-primary);
     }
 
     .bill-help-button {
         z-index: 999;
         position: absolute;
         border-radius: max(3rem);
-        border: 2px solid var(--color-lm-primary);
+        background: var(--color-background-secondary);
+        border: 2px solid var(--color-border-white);
         margin-top: 82.5vh;
         margin-left: 31vh;
         height: 4vh;
@@ -126,16 +131,14 @@
         justify-self: center;
         align-content: center;
         text-align: center;
+        color: var(--color-text-primary);
+        text-decoration: none;
+        font-size: 2rem;
+        line-height: 3vh;
     }
 
     .bill-help-button:hover {
         transform: scale(1.1);
         cursor: pointer;
-    }
-    .bill-help-button a {
-        text-decoration: none;
-        color: var(--color-lm-primary);
-        font-size: 2rem;
-        line-height: 3vh;
     }
 </style>
