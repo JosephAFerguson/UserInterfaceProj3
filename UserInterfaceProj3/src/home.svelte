@@ -1,20 +1,33 @@
 <script>
-    let amount_due = "75.00";
+    import { billingHistory } from "./stores/user";
+
+    $: bills = $billingHistory;
+
+    const monthOrder = [
+        "November", "October", "September", "August", "July", "June",
+        "May", "April", "March", "February", "January", "December"
+    ];
+
+    // Find newest active month
+    $: latestMonth = monthOrder.find(m => bills?.[m]);
+
+    // Total amount due across all months
+    $: amount_due = bills
+        ? Object.values(bills).reduce((sum, month) => sum + (month.amountDue || 0), 0).toFixed(2)
+        : "0.00";
+
+    // Static values for example
     let due_date = "11/26/2025";
     let rate = 500;
     let max_rate = 2000; // 2Gbps in Mbps
 
     let status = "up";
-    let status_indicator = "./public/check-mark.png";
-    if (status == "up") {
-        status_indicator = "./public/check-mark.png";
-    } else {
-        status_indicator = "./public/x-mark.png";
-    }
+    $: status_indicator = status === "up"
+        ? "./public/check-mark.png"
+        : "./public/x-mark.png";
 
-    // Calculate the progress percentage
+    // Progress bar logic
     $: progress = (rate / max_rate) * 100;
-    // Convert to degrees for full circle (360 degrees max)
     $: progressDegrees = (progress / 100) * 360;
 </script>
 
@@ -23,14 +36,16 @@
         <img src="./public/altafiber_text_logo_white.png" alt="Logo" height="50" style="display:block;margin:0 auto;"/>
     </h1>
     <div class="due-info">
-        <p class="pay-now">Pay Now</p>
-        <p class="amount-due">
-            ${amount_due}
-        </p>
-        <p class = "due-date">
-            Due: {due_date}
-        </p>
+        <div class="due-details">
+            <p class="amount-due">${amount_due}</p>
+            <p class="due-date">Due: {due_date}</p>
+        </div>
+
+        <a href="#/Payment" class="pay-now-btn">
+            Pay Now
+        </a>
     </div>
+
     <div class="bottom-section">
         <div class="rate">
             <div class="speed-meter">
@@ -42,7 +57,7 @@
                             fill="none"/>
                     <!-- Progress circle -->
                     <circle cx="120" cy="120" r="80" 
-                            stroke="var(--color-lm-bg2)" 
+                            stroke="var(--color-border-white)" 
                             stroke-width="12" 
                             fill="none"
                             stroke-dasharray="{2 * Math.PI * 80}"
@@ -55,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <!-- Maybe add payment upgrade button here -->
         <div class="status">
             <img src={status_indicator} alt="Status Indicator" height="120"/>
             <p>Status</p>
@@ -67,37 +83,55 @@
         display: flex;
         flex-direction: column;
         grid-area: content;
-        background-color: var(--color-lm-secondary);
         height: 100%;
-        color: var(--color-lm-bg2);
-        padding: 20px;
+        color: var(--color-text-primary);
+        padding: 1.5rem;
         box-sizing: border-box;
     }
+
     .due-info {
         margin-top: 1rem;
-        background-color: var(--color-lm-primary);
+        background-color: var(--color-background-secondary);
         padding: 1.25rem;
         border-radius: 2.5rem;
+        border: 2px solid var(--color-border-white);
     }
-    .pay-now {
-        font-size: 2rem;
-        text-align: center;
-        margin: 0;
+
+    .due-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
+
     .amount-due {
         font-size: 4.5rem;
-        text-align: center;
         margin: 0;
     }
+
     .due-date {
         font-size: 1.5rem;
-        text-align: center;
         margin: 0;
+        text-align: right;
     }
+
+    .pay-now-btn {
+        display: block;
+        margin: 1.2rem auto 0 auto;
+        text-align: center;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--color-border-white);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 1rem;
+        font-size: 2rem;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+    }
+
     
     .bottom-section {
         flex: 1;
         display: flex;
+        color: var(--color-text-secondary);
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
