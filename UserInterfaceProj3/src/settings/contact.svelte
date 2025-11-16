@@ -61,6 +61,11 @@
       Back
     </a>
     <h2>Contact Us</h2>
+    <div class="contact-info">
+      <p>Phone Number: 1 (888) 246-2355</p>
+      <p>Email: support@altafiber.com</p>
+      <p>Hours: Mon-Fri 9AM-5PM</p>
+    </div>
     <p class="subtext">
       We're here to help. Send us a message and we'll get back to you shortly.
     </p>
@@ -117,6 +122,12 @@
     max-width: 90%;
   }
 
+  .contact-info {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-background-secondary);
+  }
+  
   .success-toast {
     background-color: #ecfdf5;
     color: #047857;
