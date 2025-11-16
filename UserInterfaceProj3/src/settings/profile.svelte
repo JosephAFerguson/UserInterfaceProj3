@@ -225,18 +225,20 @@
     padding: 1.5rem;
     padding-bottom: 6rem;
     grid-area: content;
-    background-color: #fff;
-    color: #222;
+    color: var(--color-text-secondary);
     overflow-y: auto;
   }
 
   .header {
     margin-bottom: 2rem;
+    text-align: center;
+    color: var(--color-text-secondary);
+  
   }
 
   .back-button {
     text-decoration: none;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -268,7 +270,7 @@
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #e5e7eb;
+    background-color: var(--color-text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,8 +321,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #2563eb;
-    color: white;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
   }
 
   .photo-btn:hover {
@@ -343,11 +345,10 @@
   input {
     padding: 0.75rem;
     font-size: 1rem;
-    color: #555;
-    border: 1px solid #ccc;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-white);
     border-radius: 8px;
     margin-top: 0.25rem;
-    background-color: #f7f7f7;
     transition: border 0.2s ease;
     font-family: inherit;
   }
@@ -358,15 +359,14 @@
   }
 
   input::placeholder {
-    color: #999;
+    color: var(--color-text-primary);
   }
 
   button[type="submit"] {
     padding: 0.75rem;
     font-size: 1rem;
-    font-weight: bold;
-    background-color: #1d4ed8;
-    color: white;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
     border: none;
     border-radius: 8px;
     cursor: pointer;

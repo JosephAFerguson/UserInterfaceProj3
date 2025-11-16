@@ -12,5 +12,6 @@
     .inbox-content {
         display: grid;
         grid-area: content;
+        padding: 1.rem;
     }
 </style>

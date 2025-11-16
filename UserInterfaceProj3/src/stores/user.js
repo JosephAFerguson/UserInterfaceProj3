@@ -16,16 +16,16 @@ export const user = writable({
 });
 
 export const billingHistory = writable({
-  November: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Unpaid" },
-  October: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  September: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  August: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  July: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  June: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  May: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  April: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  March: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid"  },
-  February: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  January: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" },
-  December: {amount: (Math.random() * 150 + 50).toFixed(2), status: "Paid" }
+  November: {amountDue: 93.56, amountPaid: 0.00, status: "Unpaid" },
+  October: {amountDue: 16.98, amountPaid: 76.55, status: "Unpaid" },
+  September: {amountDue: 0.00,amountPaid: 53.12, status: "Paid" },
+  August: {amountDue: 0.00, amountPaid: 89.97, status: "Paid" },
+  July: {amountDue: 0.00, amountPaid: 84.33, status: "Paid" },
+  June: {amountDue: 0.00, amountPaid: 69.67, status: "Paid" },
+  May: {amountDue: 0.00, amountPaid: 64.28, status: "Paid" },
+  April: {amountDue: 0.00, amountPaid: 54.25, status: "Paid" },
+  March: {amountDue: 0.00, amountPaid: 67.67, status: "Paid"  },
+  February: {amountDue: 0.00, amountPaid: 78.01, status: "Paid" },
+  January: {amountDue: 0.00, amountPaid: 92.72, status: "Paid" },
+  December: {amountDue: 0.00, amountPaid: 88.52, status: "Paid" }
 });

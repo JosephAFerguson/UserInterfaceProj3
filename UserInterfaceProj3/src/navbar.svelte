@@ -34,7 +34,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        background: var(--color-lm-primary);
+        background: var(--color-background-secondary);
     }
 
     .nav-item {
@@ -45,7 +45,7 @@
 
     .navbar-content a {
         text-decoration: none;
-        color: var(--color-lm-on-primary);
+        color: var(--color-text-primary);
         font-size: 0.9rem;
         font-weight: bold;
     }
