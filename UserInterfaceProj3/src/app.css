@@ -3,13 +3,13 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --color-lm-primary: #63aae0;
-  --color-lm-secondary: #012538;
-  --color-lm-other: #2C2927;
-  --color-lm-accent: #765144;
-  --color-lm-bg: #ffffff;
-  --color-lm-bg2: #f9fbfd;
-  --color-lm-bg3: #f5f6f6;
+  --color-text-primary: #000000;
+  --color-text-secondary: #ffffff;
+  --color-background-secondary: #63aae0;
+  --color-background-primary: #012538;
+  --color-border-white: #ffffff;
+  --color-border-black: #000000;
+  --color-text-subtext: #ffffff92;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,12 +23,12 @@
   grid-template-areas:
     "content"
     "navbar-content";
-  height: 99vh;
+  height: 98vh;
   width: 40vh;
   border-radius: 3rem;
-  border: 2px solid var(--color-lm-primary);
-  margin: 0 auto;         
-  background-color: var(--color-lm-bg);
+  border: 2px solid var(--color-background-secondary);
+  margin: 0 auto;
+  background-color: var(--color-background-primary);
   overflow: hidden;
 }
 
@@ -42,14 +42,14 @@
 /* Navbar remains fixed-height and touch-friendly */
 #navbar-content {
   grid-area: navbar-content;
-  background-color: var(--color-lm-bg2);
   text-align: center;
 }
 
 /* Optional mobile tweaks */
 @media (max-width: 480px) {
   :root {
-    font-size: 14px; /* Slightly smaller base text on small screens */
+    font-size: 14px;
+    /* Slightly smaller base text on small screens */
   }
 
   #navbar-content {

@@ -1,29 +1,29 @@
 <script>
-
+    import Icon from '@iconify/svelte';
 </script>
 
 <div class="navbar-content">
-    <div class="navbar-home">  
+    <div class="nav-item">  
         <a href="#/">
-            <img src="logo.png" alt="Logo" width="30" height="30"/>
+            <Icon icon="lucide:home" width="30" height="30"/>
             <p>Home</p>
         </a>
     </div>
-    <div class="navbar-inbox">  
-        <a href="#/">
-            <img src="logo.png" alt="Logo" width="30" height="30"/>
+    <div class="nav-item">  
+        <a href="#/inbox">
+            <Icon icon="lucide:inbox" width="30" height="30"/>
             <p>Inbox</p>
         </a>
     </div>
-    <div class="navbar-bill">  
-        <a href="#/">
-            <img src="logo.png" alt="Logo" width="30" height="30"/>
+    <div class="nav-item">  
+        <a href="#/bill">
+            <Icon icon="lucide:receipt" width="30" height="30"/>
             <p>Billing</p>
         </a>
     </div>
-    <div class="navbar-settings"> 
-        <a href="#/"> 
-            <img src="logo.png" alt="Logo" width="30" height="30"/>
+    <div class="nav-item"> 
+        <a href="#/settings"> 
+            <Icon icon="lucide:settings" width="30" height="30"/>
             <p>Settings</p>
         </a>
     </div>
@@ -32,28 +32,25 @@
 <style>
     .navbar-content {
         display: flex;
-        grid-area: navbar-content;
-        background: var(--color-lm-primary);
-        align-items: center;         
-        justify-content: center;      
-        overflow: hidden;
-        gap: 12%;                 
+        justify-content: space-evenly;
+        align-items: center;
+        background: var(--color-background-secondary);
     }
 
-    .navbar-inbox, 
-    .navbar-home, 
-    .navbar-bill, 
-    .navbar-settings {
+    .nav-item {
         display: grid;
-        grid-template-rows: auto auto;
-        justify-content: center;     
+        justify-content: center;
+        text-align: center;
     }
 
     .navbar-content a {
-        align-items: center;         
         text-decoration: none;
-        color: var(--color-lm-on-primary);
+        color: var(--color-text-primary);
         font-size: 0.9rem;
         font-weight: bold;
+    }
+
+    p{
+        margin: 0;
     }
 </style>
