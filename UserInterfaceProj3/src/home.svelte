@@ -80,10 +80,15 @@
 
 <style>
     .home-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 7.5vh;
         display: flex;
         flex-direction: column;
-        grid-area: content;
-        height: 100%;
+        justify-content: space-between;
+        align-items: center;
         color: var(--color-text-primary);
         padding: 1.5rem;
         box-sizing: border-box;
@@ -95,17 +100,23 @@
         padding: 1.25rem;
         border-radius: 2.5rem;
         border: 2px solid var(--color-border-white);
+        width: 16%;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .due-details {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
+        text-align: center;
     }
 
     .amount-due {
-        font-size: 4.5rem;
+        font-size: 2.5rem;
         margin: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .due-date {
@@ -135,8 +146,8 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        width: 66.67%;
-        margin: 0 auto;
+        width: 90%;
+        max-width: 400px;
         margin-top: 20px;
     }
     
