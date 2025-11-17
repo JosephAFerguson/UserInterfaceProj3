@@ -208,13 +208,7 @@
     #rate_title {
         font-weight: bold;
         font-size: 1.75rem;
-    }
-
-    .max-rate {
-        font-size: 1.1rem;
-        opacity: 0.7;
-        margin-top: 5px;
-        display: block;
+        transform: translate(0, -50%);
     }
     
     .bottom-section .status p {
