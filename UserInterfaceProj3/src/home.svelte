@@ -2,7 +2,7 @@
     import { billingHistory } from "./stores/user";
     import whiteAltaLogo from "/public/altafiber_text_logo_white.png";
     import checkMark from "/public/check-mark.png";
-    //import xMark from "/public/x-mark.png";
+    import xMark from "/public/redx.png";
 
     $: bills = $billingHistory;
 
@@ -25,15 +25,13 @@
     let max_rate = 2000; // 2Gbps in Mbps
 
     let status = "up";
-    let status_indicator = checkMark;
-    /*$: status_indicator = status === "up"
-        ? {checkMark}
-        : {xMark};
-        */
+    let status_indicator = status === "up" ? checkMark : xMark;
 
     // Progress bar logic
     $: progress = (rate / max_rate) * 100;
     $: progressDegrees = (progress / 100) * 360;
+
+    $: connection_status = status === "up" ? "Connected" : "Disconnected";
 </script>
 
 <div class="home-content">
@@ -78,7 +76,7 @@
         <!-- Maybe add payment upgrade button here -->
         <div class="status">
             <img src={status_indicator} alt="Status Indicator" height="120"/>
-            <p>Status</p>
+            <p>Status: {connection_status}</p>
         </div>
     </div>
 </div>
