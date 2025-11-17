@@ -90,6 +90,9 @@
                     <p>{rate}Mbps</p>
                 </div>
             </div>
+            <p id="rate_title">
+                Plan Rate
+            </p>
         </div>
         <!-- Maybe add payment upgrade button here -->
         <div class="status">
@@ -202,6 +205,11 @@
         font-weight: bold;
     }
 
+    #rate_title {
+        font-weight: bold;
+        font-size: 1.75rem;
+    }
+
     .max-rate {
         font-size: 1.1rem;
         opacity: 0.7;
@@ -211,6 +219,7 @@
     
     .bottom-section .status p {
         margin: 10px 0 0 0;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+        font-weight: bold;
     }
 </style>
