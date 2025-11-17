@@ -33,7 +33,7 @@
   }
 
   .section-header {
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
@@ -53,14 +53,14 @@
     text-decoration: none;
     color: #222;
     padding: 1rem;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border-white);
     border-radius: 10px;
-    background: #f9f9f9;
+    background: var(--color-background-secondary);
     transition: background 0.2s ease;
   }
 
   .settings-item:hover {
-    background: #eef1f5;
+    background: var(--color-border-white);
   }
 
   .left {

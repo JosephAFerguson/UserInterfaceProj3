@@ -88,17 +88,17 @@
   .autopay-page {
     padding: 1.5rem;
     grid-area: content;
-    background-color: #fff;
-    color: #222;
   }
 
   .header {
+    color: var(--color-text-secondary);
     margin-bottom: 2rem;
   }
+  
 
   .back-button {
     text-decoration: none;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -113,13 +113,13 @@
 
   .subtext {
     font-size: 1rem;
-    color: #555;
+    color: var(--color-text-subtext);
     margin-top: 0.25rem;
     line-height: 1.6;
   }
 
   .autopay-section {
-    background: #f9f9f9;
+    background: var(--color-text-secondary);
     border-radius: 12px;
     padding: 1.5rem;
     max-width: 480px;
@@ -133,6 +133,7 @@
   }
 
   .label {
+    color: var(--color-text-primary);
     font-weight: 500;
     font-size: 1.1rem;
   }
@@ -166,13 +167,13 @@
     width: 20px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
+    background-color: var(--color-text-secondary);
     transition: 0.3s;
     border-radius: 50%;
   }
 
   .switch input:checked + .slider {
-    background-color: #2563eb;
+    background-color: var(--color-background-secondary);
   }
 
   .switch input:checked + .slider:before {
@@ -208,20 +209,20 @@
 
   .payment-note {
     font-size: 0.9rem;
-    color: #555;
+    color: var(--color-text-subtext);
     margin-top: 1rem;
   }
 
   .change-link {
     margin-left: 0.5rem;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     text-decoration: underline;
     font-weight: 500;
   }
 
   .schedule-preview {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-text-subtext);
     margin-top: 0.25rem;
     line-height: 1.4;
   }

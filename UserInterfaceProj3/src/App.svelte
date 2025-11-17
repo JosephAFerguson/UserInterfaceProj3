@@ -11,10 +11,12 @@
   import Autopay from './settings/autopay.svelte';
   import PaymentDetails from './settings/payment-details.svelte';
   import Ebilling from './settings/ebilling.svelte';
+  import Payment from './payment.svelte';
 
     //our views here
   const routes = {
     '/': Home,
+    '/Payment': Payment,
     '/Inbox': Inbox,
     '/Bill': Bill,
     '/settings': Settings,

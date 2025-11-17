@@ -1,7 +1,5 @@
 <script>
-    /* -------------------------------
-        ISP MESSAGE TEMPLATES
-    --------------------------------*/
+    
     const messageTemplates = [
         { title: "Your Bill is Ready", preview: "Your monthly bill for November 2024 is now available...", full: "Your monthly bill for November 2024 is now available.\n\nAccount Number: 847-29384-001\nBilling Period: Nov 1 - Nov 30, 2024\nAmount Due: $89.99\nDue Date: December 5, 2024\n\nServices:\n- High-Speed Internet 500 Mbps\n- Equipment Rental: $15\n- Taxes & Fees: $5\n\nYou can view and pay your bill through our mobile app.\n\nThank you for choosing AltaFibr!" },
         { title: "Scheduled Maintenance", preview: "We will be performing network maintenance in your area...", full: "We will be performing scheduled maintenance in your area.\n\nDate: November 20, 2024\nTime: 2:00 AM – 5:00 AM EST\nImpact: Possible brief interruptions.\n\nThis upgrade improves reliability.\n\nThank you for your patience!" },
@@ -14,9 +12,7 @@
         return { title: t.title, preview: t.preview, full: t.full };
     }
 
-    /* -------------------------------
-        SMART DATE FORMATTER (TS SAFE)
-    --------------------------------*/
+   
     function smartDate(dateStr) {
         const now = new Date();
         const msg = new Date(dateStr);
@@ -38,9 +34,8 @@
         return msg.toLocaleDateString([], { month: "short", day: "numeric" });
     }
 
-    /* -------------------------------
-        GENERATE 20 MESSAGES
-    --------------------------------*/
+    /* GENERATE 20 MESSAGES */
+
     let messages = Array.from({ length: 20 }, (_, i) => {
         const d = new Date();
         d.setDate(d.getDate() - i);
@@ -84,9 +79,7 @@
     $: selectedCount = messages.filter(m => m.selected).length;
     $: allSelected = filtered.length > 0 && filtered.every(m => m.selected);
 
-    /* -------------------------------
-        OPEN MESSAGE
-    --------------------------------*/
+   
     function openMsg(m) {
         if (massSelect) {
             m.selected = !m.selected;
@@ -97,9 +90,6 @@
         }
     }
 
-    /* -------------------------------
-        DELETE POPUP
-    --------------------------------*/
     let pendingDelete = null;
     let showConfirm = false;
 
@@ -126,9 +116,6 @@
         cancelSelection();
     }
 
-    /* -------------------------------
-        FILTERED LIST
-    --------------------------------*/
     $: filtered = messages.filter(m =>
         m.title.toLowerCase().includes(search.toLowerCase()) ||
         m.preview.toLowerCase().includes(search.toLowerCase())
@@ -139,7 +126,6 @@
     <!-- LIST VIEW -->
     {#if !selectedMessage}
 
-        <!-- STICKY HEADER SECTION -->
         <div class="sticky-header">
             <h2 class="title">Inbox</h2>
 
@@ -152,9 +138,7 @@
                 />
             </div>
 
-            <!-- ========== SELECT MODE HEADER ========== -->
             {#if !massSelect}
-                <!-- Normal Mode -->
                 <div class="massbar">
                     <div class="mass-left" on:click={enterSelectMode}>
                         <span>Select</span>
@@ -162,7 +146,7 @@
                 </div>
 
             {:else}
-                <!-- Selection Mode -->
+               
                 <div class="select-header">
                     <div class="left-side">
                         <div class="sel-button" on:click={toggleSelectAll}>
@@ -177,7 +161,7 @@
             {/if}
         </div>
 
-        <!-- MESSAGE LIST -->
+       
         <div class="list">
             {#each filtered as m}
                 <div class="row">
@@ -206,7 +190,6 @@
                         <div class="pp">{m.preview}</div>
                     </div>
 
-                    <!-- Right section: date + delete -->
                     {#if !massSelect}
                         <div class="right">
                             <div class="date">{smartDate(m.date)}</div>
@@ -231,7 +214,6 @@
             {/each}
         </div>
 
-        <!-- STICKY DELETE BUTTON AT BOTTOM -->
         {#if massSelect && selectedCount > 0}
             <div class="sticky-delete-container">
                 <button class="del-sel" on:click={deleteSelected}>
@@ -242,13 +224,9 @@
 
     {/if}
 
-
-
-    <!-- MESSAGE VIEW -->
     {#if selectedMessage}
         <div class="full">
 
-            <!-- HEADER -->
             <div class="msg-header">
                 <div class="back" on:click={() => (selectedMessage = null)}>
                     <svg width="24" height="24" viewBox="0 0 24 24" 
@@ -265,14 +243,12 @@
                 </div>
             </div>
 
-            <!-- BODY -->
             <div class="msg-body">
                 <div class="msg-content">
                     {selectedMessage.full}
                 </div>
             </div>
 
-            <!-- ACTION BUTTONS -->
             <div class="msg-actions">
 
                 <button class="action-btn reply-btn">
@@ -307,9 +283,6 @@
         </div>
     {/if}
 
-
-
-    <!-- DELETE POPUP -->
     {#if showConfirm}
         <div class="overlay">
             <div class="popup">
@@ -332,9 +305,7 @@
 
 
 <style>
-	/* ======================================== */
-/* GLOBAL + PAGE */
-/* ======================================== */
+
 
 .page, .page * {
     max-width: 100% !important;
@@ -345,14 +316,11 @@
 .page {
     width: 100%;
     height: 100%;
-    background: #012538; /* AltaFiber secondary */
+    background: #012538; 
     color: white;
     position: relative;
 }
 
-/* ======================================== */
-/* STICKY HEADER */
-/* ======================================== */
 
 .sticky-header {
     position: sticky;
@@ -369,9 +337,7 @@
     margin: 0;
 }
 
-/* ======================================== */
-/* SEARCH BAR */
-/* ======================================== */
+
 .search-box {
     padding: 0.5rem 0.9rem;
 }
@@ -384,9 +350,6 @@
     font-size: 1rem;
 }
 
-/* ======================================== */
-/* NORMAL MODE HEADER */
-/* ======================================== */
 .massbar {
     padding: 0.6rem 0.9rem;
 }
@@ -398,9 +361,6 @@
     font-size: 1rem;
 }
 
-/* ======================================== */
-/* SELECT MODE HEADER */
-/* ======================================== */
 .select-header {
     padding: 0.8rem 1rem;
     background: #012538;
@@ -427,12 +387,9 @@
     font-size: 1rem;
 }
 
-/* ======================================== */
-/* STICKY DELETE CONTAINER - INSIDE MOBILE */
-/* ======================================== */
 
 .sticky-delete-container {
-    position: sticky;   /* <<< THIS FIXES SCROLL ISSUE */
+    position: sticky;   
     bottom: 0;
     left: 0;
     right: 0;
@@ -443,7 +400,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
-    z-index: 50;  /* smaller so it's still above content */
+    z-index: 50;  
 }
 
 .sticky-delete-container .del-sel {
@@ -459,14 +416,9 @@
     box-shadow: 0 4px 15px rgba(250, 82, 82, 0.3);
 }
 
-
-/* ======================================== */
-/* MESSAGE LIST */
-/* ======================================== */
-
 .list {
     width: 100%;
-    padding-bottom: 80px; /* Add padding to account for sticky delete button */
+    padding-bottom: 80px; 
 }
 
 .row {
@@ -517,7 +469,6 @@
     flex: 1;
 }
 
-/* aligned preview text */
 .pp {
     font-size: 0.85rem;
     opacity: 0.7;
@@ -541,9 +492,6 @@
     cursor: pointer;
 }
 
-/* ======================================== */
-/* FULL MESSAGE VIEW */
-/* ======================================== */
 
 .full {
     background: #f8f9fa;
@@ -593,7 +541,6 @@
     opacity: 0.85;
 }
 
-/* MESSAGE BODY */
 .msg-body {
     flex: 1;
     overflow-y: auto;
@@ -609,9 +556,6 @@
     color: #212121;
 }
 
-/* ======================================== */
-/* ACTION BUTTONS */
-/* ======================================== */
 
 .msg-actions {
     display: flex;
@@ -642,7 +586,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* reply button */
 .reply-btn {
     border-color: #012538;
     color: #012538;
@@ -653,7 +596,6 @@
     color: white;
 }
 
-/* forward button */
 .forward-btn {
     border-color: #999;
     color: #555;
@@ -663,7 +605,6 @@
     background: #f5f5f5;
 }
 
-/* delete button */
 .delete-btn {
     border-color: #dc3545;
     color: #dc3545;
@@ -673,11 +614,6 @@
     background: #dc3545;
     color: white;
 }
-
-/* ======================================== */
-/* DELETE POPUP */
-/* ======================================== */
-
 .overlay {
     position: absolute;
     inset: 0;
@@ -722,5 +658,4 @@
     background: #FA5252;
     color: white;
 }
-
 </style>

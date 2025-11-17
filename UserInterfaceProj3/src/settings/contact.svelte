@@ -61,6 +61,11 @@
       Back
     </a>
     <h2>Contact Us</h2>
+    <div class="contact-info">
+      <p>Phone Number: 1 (888) 246-2355</p>
+      <p>Email: support@altafiber.com</p>
+      <p>Hours: Mon-Fri 9AM-5PM</p>
+    </div>
     <p class="subtext">
       We're here to help. Send us a message and we'll get back to you shortly.
     </p>
@@ -117,6 +122,12 @@
     max-width: 90%;
   }
 
+  .contact-info {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-background-secondary);
+  }
+  
   .success-toast {
     background-color: #ecfdf5;
     color: #047857;
@@ -144,7 +155,6 @@
     padding: 1.5rem;
     padding-bottom: 6rem;
     grid-area: content;
-    background-color: #fff;
     color: #222;
     overflow-y: auto;
   }
@@ -155,7 +165,7 @@
 
   .back-button {
     text-decoration: none;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -164,13 +174,14 @@
   }
 
   h2 {
+    color: var(--color-text-secondary);
     font-size: 1.5rem;
     font-weight: bold;
   }
 
   .subtext {
     font-size: 1rem;
-    color: #555;
+    color: var(--color-text-subtext);
     margin-top: 0.25rem;
     line-height: 1.6;
   }
@@ -180,7 +191,7 @@
     flex-direction: column;
     gap: 1.25rem;
     max-width: 480px;
-    background: #f9f9f9;
+    background: var(--color-border-white);
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
@@ -197,7 +208,7 @@
   textarea {
     padding: 0.75rem;
     font-size: 1rem;
-    color: #555;
+    color: var(--color-text-primary);
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-top: 0.25rem;
@@ -210,7 +221,7 @@
   input:focus,
   textarea:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: var(--color-background-secondary);
   }
 
   input::placeholder,
@@ -221,9 +232,8 @@
   button {
     padding: 0.75rem;
     font-size: 1rem;
-    font-weight: bold;
-    background-color: #1d4ed8;
-    color: white;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
     border: none;
     border-radius: 8px;
     cursor: pointer;

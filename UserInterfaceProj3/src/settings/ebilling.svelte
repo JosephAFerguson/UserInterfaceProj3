@@ -66,17 +66,16 @@
   .ebilling-page {
     padding: 1.5rem;
     grid-area: content;
-    background-color: #fff;
-    color: #222;
   }
 
   .header {
+    color: var(--color-text-secondary);
     margin-bottom: 2rem;
   }
 
   .back-button {
     text-decoration: none;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -91,16 +90,16 @@
 
   .subtext {
     font-size: 1rem;
-    color: #555;
+    color: var(--color-text-subtext);
     margin-top: 0.25rem;
     line-height: 1.6;
   }
 
   .ebilling-section {
-    background: #f9f9f9;
     border-radius: 12px;
     padding: 1.5rem;
     max-width: 480px;
+    background: var(--color-border-white);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   }
 
@@ -150,7 +149,7 @@
   }
 
   .switch input:checked + .slider {
-    background-color: #2563eb;
+    background-color: var(--color-background-secondary);
   }
 
   .switch input:checked + .slider:before {
@@ -186,13 +185,13 @@
 
   .email-note {
     font-size: 0.9rem;
-    color: #555;
+    color: var(--color-text-subtext);
     margin-top: 1rem;
   }
 
   .change-link {
     margin-left: 0.5rem;
-    color: #2563eb;
+    color: var(--color-background-secondary);
     text-decoration: underline;
     font-weight: 500;
   }
