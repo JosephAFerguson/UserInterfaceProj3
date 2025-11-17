@@ -32,6 +32,24 @@
     $: progressDegrees = (progress / 100) * 360;
 
     $: connection_status = status === "up" ? "Connected" : "Disconnected";
+
+    function change_status(){
+        if (status === "up"){
+            status = "down";
+            status_indicator = xMark;
+        } else {
+            status = "up";
+            status_indicator = checkMark;
+        }
+    }
+
+    function handleShiftSpace(event) {
+        if (event.key === ' ' && event.shiftKey) {
+        event.preventDefault();
+        change_status();
+        }
+    }
+    window.addEventListener('keydown', handleShiftSpace);
 </script>
 
 <div class="home-content">
@@ -99,13 +117,12 @@
 
     .due-info {
         margin-top: 1rem;
-        background-color: var(--color-background-secondary);
         padding: 1.25rem;
         border-radius: 2.5rem;
-        border: 2px solid var(--color-border-white);
         width: 16%;
         overflow: hidden;
         box-sizing: border-box;
+        color: white;
     }
 
     .due-details {
@@ -120,6 +137,7 @@
         margin: 0;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        font-weight: bold;
     }
 
     .due-date {
@@ -133,12 +151,12 @@
         margin: 1.2rem auto 0 auto;
         text-align: center;
         padding: 0.75rem 1.5rem;
-        border: 2px solid var(--color-border-white);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
         border-radius: 1rem;
         font-size: 2rem;
         color: var(--color-text-secondary);
         text-decoration: none;
+        background-color: var(--color-background-secondary);
     }
 
     
