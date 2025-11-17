@@ -1,5 +1,8 @@
 <script>
   import Icon from '@iconify/svelte';
+  import {previousPage} from "./stores/user";
+
+  previousPage.set("#/settings");
 
   const settingsOptions = [
     { title: "Profile", icon: "mdi:account", route: "#/settings/profile" },

@@ -1,7 +1,9 @@
 <script>
     import { billingHistory } from "./stores/user";
     import { get } from "svelte/store";
-    import Icon from '@iconify/svelte';
+    import {previousPage} from "./stores/user";
+
+    previousPage.set("#/bill");
 
     // Get store data
     let bills = get(billingHistory);
