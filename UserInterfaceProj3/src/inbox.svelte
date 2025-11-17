@@ -424,6 +424,15 @@
     background: #012538; 
     color: white;
     position: relative;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.page::-webkit-scrollbar {
+    display: none;
+    width: 0; 
+    height: 0; 
 }
 
 
@@ -441,7 +450,6 @@
     font-size: 1.5rem;
     margin: 0;
 }
-
 
 .search-box {
     padding: 0.5rem 0.9rem;
