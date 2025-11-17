@@ -1,63 +1,154 @@
 <script>
-    
-    const messageTemplates = [
-        { title: "Your Bill is Ready", preview: "Your monthly bill for November 2024 is now available...", full: "Your monthly bill for November 2024 is now available.\n\nAccount Number: 847-29384-001\nBilling Period: Nov 1 - Nov 30, 2024\nAmount Due: $89.99\nDue Date: December 5, 2024\n\nServices:\n- High-Speed Internet 500 Mbps\n- Equipment Rental: $15\n- Taxes & Fees: $5\n\nYou can view and pay your bill through our mobile app.\n\nThank you for choosing AltaFibr!" },
-        { title: "Scheduled Maintenance", preview: "We will be performing network maintenance in your area...", full: "We will be performing scheduled maintenance in your area.\n\nDate: November 20, 2024\nTime: 2:00 AM – 5:00 AM EST\nImpact: Possible brief interruptions.\n\nThis upgrade improves reliability.\n\nThank you for your patience!" },
-        { title: "Payment Confirmation", preview: "Your recent payment has been processed successfully...", full: "Your payment of $89.99 has been successfully processed.\n\nConfirmation: AF-2024-893847\nMethod: Visa ending in 4242\nDate: November 16, 2024\n\nThank you for your prompt payment!" },
-        { title: "Service Upgrade Available", preview: "Great news! Faster internet speeds are now available...", full: "Great news! Faster speeds are now available in your area.\n\nNew Plans Available:\n- 1 Gig\n- 2 Gig\n- 5 Gig\n\nUpgrade today and enjoy lightning-fast internet." }
+    import { get } from "svelte/store";
+    import { billingHistory } from "./stores/user";
+
+    const systemTemplates = [
+        {
+            title: "Scheduled Maintenance",
+            preview: "We will be performing network maintenance in your area...",
+            full: "We will be performing scheduled maintenance in your area.\n\nDate: Dec 5, 2024\nTime: 2:00 AM – 5:00 AM EST\nImpact: Brief interruptions possible.\n\nThank you for your patience!"
+        },
+        {
+            title: "Service Upgrade Available",
+            preview: "Great news! Faster internet speeds are now available...",
+            full: "Great news! Faster speeds are now available in your area.\n\nNew Plans:\n- 1 Gig\n- 2 Gig\nUpgrade today and enjoy lightning-fast internet."
+        },
+        {
+            title: "New Feature: AutoPay",
+            preview: "You can now enroll in AutoPay for faster payments...",
+            full: "You can now enroll in AutoPay.\n\nBenefits:\n- No missed payments\n- Automatic processing\n- Email confirmations\n\nEnable AutoPay in your account settings."
+        }
     ];
 
-    function getRandomMessage(i) {
-        const t = messageTemplates[i % messageTemplates.length];
-        return { title: t.title, preview: t.preview, full: t.full };
+    function randomSystemMessage() {
+        const t = systemTemplates[Math.floor(Math.random() * systemTemplates.length)];
+        return {
+            title: t.title,
+            preview: t.preview,
+            full: t.full
+        };
     }
 
-   
+    function makeBillingMessages() {
+        const history = get(billingHistory);
+        const months = Object.keys(history);
+
+        let msgs = [];
+        let index = 0;
+
+        for (const month of months) {
+            const entry = history[month];
+            const baseDate = new Date();
+            baseDate.setMonth(baseDate.getMonth() - index);
+
+            // BILL READY message
+            if (entry.amountDue > 0) {
+                msgs.push({
+                    id: crypto.randomUUID(),
+                    title: `Your ${month} Bill is Ready`,
+                    preview: `Your ${month} bill is now available...`,
+                    full:
+                        `Your monthly bill for ${month} is now available.\n\n` +
+                        `Amount Due: $${entry.amountDue.toFixed(2)}\n` +
+                        `Status: ${entry.status}\n\n` +
+                        `You can view and pay your bill through your dashboard.`,
+                    date: baseDate.toISOString(),
+                    unread: true,
+                    selected: false
+                });
+            }
+
+            // PAYMENT CONFIRMATION (if paid)
+            if (entry.status === "Paid") {
+                msgs.push({
+                    id: crypto.randomUUID(),
+                    title: `Payment Confirmation – ${month}`,
+                    preview: `Your payment for ${month} has been processed...`,
+                    full:
+                        `Your payment for ${month} has been processed successfully.\n\n` +
+                        `Amount Paid: $${entry.amountPaid.toFixed(2)}`,
+                    date: baseDate.toISOString(),
+                    unread: Math.random() > 0.3,
+                    selected: false
+                });
+            }
+
+            // STATUS UPDATE (general)
+            msgs.push({
+                id: crypto.randomUUID(),
+                title: `Billing Status Update – ${month}`,
+                preview: `Here is your billing summary for ${month}...`,
+                full:
+                    `Billing Summary for ${month}\n\n` +
+                    `Amount Due: $${entry.amountDue.toFixed(2)}\n` +
+                    `Amount Paid: $${entry.amountPaid.toFixed(2)}\n` +
+                    `Status: ${entry.status}`,
+                date: baseDate.toISOString(),
+                unread: Math.random() > 0.5,
+                selected: false
+            });
+
+            index++;
+        }
+
+        return msgs;
+    }
+
+    function makeSystemMessages() {
+        const count = Math.floor(Math.random() * 6) + 5; // 5–10 messages
+        const msgs = [];
+
+        for (let i = 0; i < count; i++) {
+            const daysAgo = Math.floor(Math.random() * 40);
+            const date = new Date();
+            date.setDate(date.getDate() - daysAgo);
+
+            const sys = randomSystemMessage();
+            msgs.push({
+                id: crypto.randomUUID(),
+                title: sys.title,
+                preview: sys.preview,
+                full: sys.full,
+                date: date.toISOString(),
+                unread: Math.random() > 0.5,
+                selected: false
+            });
+        }
+
+        return msgs;
+    }
+
+    let messages = [
+        ...makeBillingMessages(),
+        ...makeSystemMessages()
+    ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    let selectedMessage = null;
+    let search = "";
+
     function smartDate(dateStr) {
         const now = new Date();
         const msg = new Date(dateStr);
-        const d = 86400000;
 
+        const ONE_DAY = 86400000;
         const diff = now.getTime() - msg.getTime();
 
         if (msg.toDateString() === now.toDateString()) {
             return msg.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
         }
 
-        const yesterday = new Date(now.getTime() - d);
-        if (msg.toDateString() === yesterday.toDateString()) return "Yesterday";
+        const yesterday = new Date(now.getTime() - ONE_DAY);
+        if (msg.toDateString() === yesterday.toDateString()) {
+            return "Yesterday";
+        }
 
-        if (diff < 7 * d) {
+        if (diff < 7 * ONE_DAY) {
             return msg.toLocaleDateString([], { weekday: "long" });
         }
 
         return msg.toLocaleDateString([], { month: "short", day: "numeric" });
     }
 
-    /* GENERATE 20 MESSAGES */
 
-    let messages = Array.from({ length: 20 }, (_, i) => {
-        const d = new Date();
-        d.setDate(d.getDate() - i);
-        const content = getRandomMessage(i);
-
-        return {
-            id: i + 1,
-            title: content.title,
-            preview: content.preview,
-            full: content.full,
-            date: d.toISOString(),
-            unread: Math.random() > 0.5,
-            selected: false
-        };
-    });
-
-    let selectedMessage = null;
-    let search = "";
-
-    /* -------------------------------
-        SELECTION MODE
-    --------------------------------*/
     let massSelect = false;
 
     function enterSelectMode() {
@@ -66,20 +157,19 @@
 
     function cancelSelection() {
         massSelect = false;
-        messages.forEach(m => (m.selected = false));
+        messages.forEach(m => m.selected = false);
         messages = messages;
     }
 
     function toggleSelectAll() {
         const allSelected = filtered.every(m => m.selected);
-        filtered.forEach(m => (m.selected = !allSelected));
+        filtered.forEach(m => m.selected = !allSelected);
         messages = messages;
     }
 
     $: selectedCount = messages.filter(m => m.selected).length;
     $: allSelected = filtered.length > 0 && filtered.every(m => m.selected);
 
-   
     function openMsg(m) {
         if (massSelect) {
             m.selected = !m.selected;
@@ -105,8 +195,7 @@
 
     function deleteNow() {
         messages = messages.filter(m => m.id !== pendingDelete);
-        if (selectedMessage && selectedMessage.id === pendingDelete) selectedMessage = null;
-
+        if (selectedMessage?.id === pendingDelete) selectedMessage = null;
         pendingDelete = null;
         showConfirm = false;
     }
@@ -121,6 +210,8 @@
         m.preview.toLowerCase().includes(search.toLowerCase())
     );
 </script>
+
+
 <div class="page">
 
     <!-- LIST VIEW -->
@@ -140,6 +231,8 @@
 
             {#if !massSelect}
                 <div class="massbar">
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <!-- svelte-ignore a11y_no_static_element_interactions -->
                     <div class="mass-left" on:click={enterSelectMode}>
                         <span>Select</span>
                     </div>
@@ -148,12 +241,17 @@
             {:else}
                
                 <div class="select-header">
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
                     <div class="left-side">
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <!-- svelte-ignore a11y_no_static_element_interactions -->
                         <div class="sel-button" on:click={toggleSelectAll}>
                             <span>{allSelected ? 'Unselect All' : 'Select All'}</span>
                         </div>
                     </div>
 
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <!-- svelte-ignore a11y_no_static_element_interactions -->
                     <div class="sel-cancel" on:click={cancelSelection}>
                         Cancel
                     </div>
@@ -164,6 +262,7 @@
        
         <div class="list">
             {#each filtered as m}
+                <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <div class="row">
 
                     <!-- Checkbox in select mode -->
@@ -177,6 +276,8 @@
                     {/if}
 
                     <!-- Message body -->
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <!-- svelte-ignore a11y_no_static_element_interactions -->
                     <div class="left" on:click={() => openMsg(m)}>
                         <div class="topline">
                             {#if m.unread}
@@ -191,15 +292,17 @@
                     </div>
 
                     {#if !massSelect}
+                        <!-- svelte-ignore a11y_no_static_element_interactions -->
                         <div class="right">
                             <div class="date">{smartDate(m.date)}</div>
 
+                            <!-- svelte-ignore a11y_no_static_element_interactions -->
                             <div 
                                 class="del" 
                                 on:click|stopPropagation={() => askDelete(m.id)}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" style="fill:#FA5252;">
+                                    viewBox="0 0 24 24" style="fill:#9c0000;">
                                     <path d="M10.8 2C10.28 2 9.84 2.37 9.75 2.88L9.36 5H4C3.45 5 3 5.45 
                                     3 6C3 6.55 3.45 7 4 7H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 
                                     19 19V7H20C20.55 7 21 6.55 21 6C21 5.45 20.55 5 20 5H14.64L14.25 
@@ -228,6 +331,8 @@
         <div class="full">
 
             <div class="msg-header">
+                <!-- svelte-ignore a11y_click_events_have_key_events -->
+                <!-- svelte-ignore a11y_no_static_element_interactions -->
                 <div class="back" on:click={() => (selectedMessage = null)}>
                     <svg width="24" height="24" viewBox="0 0 24 24" 
                         fill="none" stroke="white" stroke-width="2">
@@ -319,6 +424,15 @@
     background: #012538; 
     color: white;
     position: relative;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.page::-webkit-scrollbar {
+    display: none;
+    width: 0; 
+    height: 0; 
 }
 
 
@@ -336,7 +450,6 @@
     font-size: 1.5rem;
     margin: 0;
 }
-
 
 .search-box {
     padding: 0.5rem 0.9rem;
@@ -402,7 +515,7 @@
 }
 
 .sticky-delete-container .del-sel {
-    background: #FA5252;
+    background: #9c0000;
     color: white;
     border: none;
     padding: 10px 12px;
@@ -601,12 +714,12 @@
 }
 
 .delete-btn {
-    border-color: #dc3545;
-    color: #dc3545;
+    border-color: #9c0000;
+    color: #9c0000;
 }
 
 .delete-btn:hover {
-    background: #dc3545;
+    background: #9c0000;
     color: white;
 }
 .overlay {
@@ -650,7 +763,7 @@
 }
 
 .yes {
-    background: #FA5252;
+    background: #9c0000;
     color: white;
 }
 </style>

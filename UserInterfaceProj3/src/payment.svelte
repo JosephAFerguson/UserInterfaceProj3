@@ -1,6 +1,7 @@
 <script>
     import { user } from "./stores/user";
     import { billingHistory } from "./stores/user";
+    import {previousPage} from "./stores/user";
 
     $: bills = $billingHistory;
 
@@ -82,6 +83,7 @@
         resetTimer = setTimeout(() => successMessage = "", 3000);
     }
 
+    previousPage.set("#/payment"); // set previous page for navigation back from payment details
 
 </script>
 

@@ -1,6 +1,9 @@
 <script>
   import Icon from '@iconify/svelte';
   import { user } from '../stores/user.js';
+  import {previousPage} from "../stores/user";
+
+  let back = $previousPage || "#/settings";
   
   $: autopayEnabled = $user.autopayEnabled ?? false;
   $: hasPaymentMethod = $user.cardLast4 && $user.cardLast4.length > 0;
@@ -35,7 +38,7 @@
 
 <div class="autopay-page">
   <div class="header">
-    <a href="#/settings" class="back-button">
+    <a href={back} class="back-button">
       <Icon icon="mdi:chevron-left" width="24" height="24" />
       Back
     </a>

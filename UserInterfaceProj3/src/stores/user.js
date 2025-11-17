@@ -29,3 +29,5 @@ export const billingHistory = writable({
   January: {amountDue: 0.00, amountPaid: 92.72, status: "Paid" },
   December: {amountDue: 0.00, amountPaid: 88.52, status: "Paid" }
 });
+
+export const previousPage = writable(null);

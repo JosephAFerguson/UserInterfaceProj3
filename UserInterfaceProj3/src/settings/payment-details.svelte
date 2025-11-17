@@ -1,4 +1,5 @@
 <script>
+  import {previousPage} from "../stores/user";
   import Icon from '@iconify/svelte';
   import { user } from '../stores/user.js';
 
@@ -9,6 +10,8 @@
   let successMessage = "";
   let errorMessage = "";
   let resetTimer;
+
+  let back = $previousPage || "/settings";
 
   function formatCardNumber(value) {
     const digits = value.replace(/\D/g, '');
@@ -117,7 +120,7 @@
 
 <div class="payment-page">
   <div class="header">
-    <a href="#/settings" class="back-button">
+    <a href={back} class="back-button">
       <Icon icon="mdi:chevron-left" width="24" height="24" />
       Back
     </a>
