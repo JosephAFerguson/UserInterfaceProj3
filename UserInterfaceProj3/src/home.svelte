@@ -24,7 +24,7 @@
     let rate = 500;
     let max_rate = 2000; // 2Gbps in Mbps
 
-    let status = "down";
+    let status = "up";
     let status_indicator = status === "up" ? checkMark : xMark;
 
     // Progress bar logic
