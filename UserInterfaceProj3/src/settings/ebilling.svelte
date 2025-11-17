@@ -1,7 +1,11 @@
 <script>
   import Icon from '@iconify/svelte';
   import { user } from '../stores/user.js';
+  import {previousPage} from "../stores/user";
   
+  let back = $previousPage != "#/settings/ebilling" || null ? $previousPage:'#/settings'; //make sure previousPage is not this page itself
+  previousPage.set("#/settings/ebilling");
+
   $: ebillingEnabled = $user.ebillingEnabled ?? true;
   let successMessage = "";
   let messageType = "on";
@@ -32,7 +36,7 @@
 
 <div class="ebilling-page">
   <div class="header">
-    <a href="#/settings" class="back-button">
+    <a href={back} class="back-button">
       <Icon icon="mdi:chevron-left" width="24" height="24" />
       Back
     </a>

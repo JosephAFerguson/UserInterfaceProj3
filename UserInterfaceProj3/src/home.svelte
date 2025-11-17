@@ -1,5 +1,8 @@
 <script>
     import { billingHistory } from "./stores/user";
+    import whiteAltaLogo from "/public/altafiber_text_logo_white.png";
+    import checkMark from "/public/check-mark.png";
+    //import xMark from "/public/x-mark.png";
 
     $: bills = $billingHistory;
 
@@ -22,9 +25,11 @@
     let max_rate = 2000; // 2Gbps in Mbps
 
     let status = "up";
-    $: status_indicator = status === "up"
-        ? "./public/check-mark.png"
-        : "./public/x-mark.png";
+    let status_indicator = checkMark;
+    /*$: status_indicator = status === "up"
+        ? {checkMark}
+        : {xMark};
+        */
 
     // Progress bar logic
     $: progress = (rate / max_rate) * 100;
@@ -33,7 +38,7 @@
 
 <div class="home-content">
     <h1>
-        <img src="./public/altafiber_text_logo_white.png" alt="Logo" height="50" style="display:block;margin:0 auto;"/>
+        <img src={whiteAltaLogo} alt="Logo" height="50" style="display:block;margin:0 auto;"/>
     </h1>
     <div class="due-info">
         <div class="due-details">
