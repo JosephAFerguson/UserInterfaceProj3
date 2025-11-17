@@ -396,8 +396,6 @@
 	top: 0;
     padding: 1rem;
     background: rgba(1, 37, 56, 0.95);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
     z-index: 50;  
@@ -416,10 +414,7 @@
     box-shadow: 0 4px 15px rgba(250, 82, 82, 0.3);
 }
 
-.list {
-    width: 100%;
-    padding-bottom: 80px; 
-}
+
 
 .row {
     display: flex;
