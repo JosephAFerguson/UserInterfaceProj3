@@ -1,20 +1,33 @@
 <script>
-    let amount_due = "75.00";
+    import { billingHistory } from "./stores/user";
+
+    // Properly pull data from the store using $ shorthand
+    $: bills = $billingHistory;
+
+    // Ordered months (newest first)
+    const monthOrder = [
+        "November", "October", "September", "August", "July", "June",
+        "May", "April", "March", "February", "January", "December"
+    ];
+
+    // Determine latest available month
+    $: latestMonth = monthOrder.find(m => bills[m]); 
+
+    // Read amount from store
+    $: amount_due = bills[latestMonth]?.amount || "0.00";
+
+    // Static values for example
     let due_date = "11/26/2025";
     let rate = 500;
     let max_rate = 2000; // 2Gbps in Mbps
 
     let status = "up";
-    let status_indicator = "./public/check-mark.png";
-    if (status == "up") {
-        status_indicator = "./public/check-mark.png";
-    } else {
-        status_indicator = "./public/x-mark.png";
-    }
+    $: status_indicator = status === "up"
+        ? "./public/check-mark.png"
+        : "./public/x-mark.png";
 
-    // Calculate the progress percentage
+    // Progress bar logic
     $: progress = (rate / max_rate) * 100;
-    // Convert to degrees for full circle (360 degrees max)
     $: progressDegrees = (progress / 100) * 360;
 </script>
 
