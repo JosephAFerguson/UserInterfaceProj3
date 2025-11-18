@@ -72,12 +72,12 @@
             <div class="speed-meter">
                 <svg width="240" height="240" viewBox="0 0 240 240">
                     <!-- Background circle -->
-                    <circle cx="120" cy="120" r="80" 
+                    <circle cx="120" cy="120" r="85" 
                             stroke="rgba(255,255,255,0.3)" 
                             stroke-width="12" 
                             fill="none"/>
                     <!-- Progress circle -->
-                    <circle cx="120" cy="120" r="80" 
+                    <circle cx="120" cy="120" r="85" 
                             stroke="var(--color-border-white)" 
                             stroke-width="12" 
                             fill="none"
@@ -122,8 +122,7 @@
         margin-top: 1rem;
         padding: 1.25rem;
         border-radius: 2.5rem;
-        width: 16%;
-        overflow: hidden;
+        width: 33vh;
         box-sizing: border-box;
         color: white;
     }
@@ -140,7 +139,6 @@
         margin: 0;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        font-weight: bold;
     }
 
     .due-date {
@@ -202,18 +200,15 @@
     .bottom-section .rate p {
         margin: 0;
         font-size: 1.8rem;
-        font-weight: bold;
     }
 
     #rate_title {
-        font-weight: bold;
-        font-size: 1.75rem;
+        font-size: 2rem;
         transform: translate(0, -50%);
     }
     
     .bottom-section .status p {
         margin: 10px 0 0 0;
-        font-size: 1.75rem;
-        font-weight: bold;
+        font-size: 2rem;
     }
 </style>

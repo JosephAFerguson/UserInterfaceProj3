@@ -2,6 +2,7 @@
     import { billingHistory } from "./stores/user";
     import { get } from "svelte/store";
     import {previousPage} from "./stores/user";
+    import ExampleInvoice from "/public/ExampleInvoice.pdf";
 
     previousPage.set("#/bill");
 
@@ -30,6 +31,20 @@
     function toggle(index) {
         openMonth = openMonth === index ? null : index;
     }
+
+    function downloadInvoice() {
+        const filePath = ExampleInvoice;
+
+        const a = document.createElement("a");
+        a.href = filePath;
+
+        a.download = "ExampleInvoice.pdf";
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
 </script>
 
 <div class="bill-content">
@@ -47,20 +62,25 @@
                 
 
                 {#if openMonth === index}
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
                     <div class="bill-details">
                         <p><strong>Monthly Bill:</strong> ${month.amountTotal}</p>
                         <p>Status: {month.status}</p>
                         {#if month.status !== "Paid"}
                             <p>Amount Left: ${month.amountDue.toFixed(2)}</p>
                         {/if}
-                        <p class="download">Download Invoice (PDF)</p>
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                        <p class="download" on:click={downloadInvoice}>Download Invoice (PDF)</p>
                     </div>
                 {/if}
             </div>
         {/each}
     </div>
 
+    <!--
     <a class="bill-help-button" href="#/settings/contact">?</a>
+    --> 
 </div>
 
 <style>
@@ -68,7 +88,20 @@
         grid-area: content;
         padding: 1.5rem;
         display: grid;
+        height: 95%;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         gap: 1rem;
+    }
+
+    .bill-content::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .bill-list {
+        display: grid;
+        gap: 0.75rem;
     }
 
     .bill-content h2{
@@ -77,21 +110,16 @@
         color: var(--color-text-secondary);
     }
 
-    .bill-list {
-        display: grid;
-        gap: 0.75rem;
-    }
-
     .bill-item {
-        border: 1px solid var(--color-border-white);
         border-radius: 10px;
-        overflow: hidden;
         color: var(--color-text-primary);
-        background: var(--color-background-secondary);
+        background: var(--color-border-white);
     }
 
     .bill-header {
         display: flex;
+        border-radius: 10px;
+        background: var(--color-border-white);
         justify-content: space-between;
         padding: 0.75rem 1rem;
         cursor: pointer;
@@ -100,26 +128,27 @@
     }
 
     .bill-header:hover {
-        background: var(--color-border-white);
+        background: var(--color-background-secondary);
     }
 
     .bill-details {
-        padding: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         background: var(--color-lm-bg2);
         border-top: 1px solid #ddd;
         font-size: 0.95rem;
     }
 
     .download {
-        color: var(--color-text-secondary);
+        color: var(--color-background-secondary);
         cursor: pointer;
-        margin-top: 0.5rem;
     }
 
     .amount {
         color: var(--color-lm-primary);
     }
 
+    /*
     .bill-help-button {
         z-index: 999;
         position: absolute;
@@ -143,4 +172,5 @@
         transform: scale(1.1);
         cursor: pointer;
     }
+        */
 </style>

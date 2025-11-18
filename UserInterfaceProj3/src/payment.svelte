@@ -163,6 +163,7 @@
 
 .due-details {
     display: flex;
+    text-align: center;
     justify-content: space-between;
     align-items: center;
     color: var(--color-text-primary);

@@ -32,14 +32,12 @@
   overflow: hidden;
 }
 
-/* Makes scrolling inside content safe */
 #content {
   grid-area: content;
   overflow-y: auto;
   padding: 1rem;
 }
 
-/* Navbar remains fixed-height and touch-friendly */
 #navbar-content {
   grid-area: navbar-content;
   text-align: center;
