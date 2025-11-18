@@ -14,6 +14,6 @@ However, it is reasonably responsive for smaller or larger resolutions, especial
 
 Please download and view Proj3Documentation.docx in root folder for easy viewing, if not, it is also available below:
 
-<documentation>
+<details>
   ...
-</documentation>
+</details>
