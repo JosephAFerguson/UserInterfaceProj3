@@ -2,6 +2,7 @@
 
 Needs spa-router
 `npm install svelte-spa-router`
+
 Needs iconify@svelte 
 `npm install @iconify/svelte`
 
