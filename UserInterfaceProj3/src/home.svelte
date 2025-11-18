@@ -116,6 +116,13 @@
         color: var(--color-text-primary);
         padding: 1.5rem;
         box-sizing: border-box;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .home-content::-webkit-scrollbar {
+        display: none;
     }
 
     .due-info {
