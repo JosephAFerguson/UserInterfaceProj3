@@ -21,5 +21,7 @@ Please download and view Proj3Documentation.docx in root folder for easy viewing
 
 **LINKS**
 
+Public Hosting:
 https://jf-userinterfaceproj3.netlify.app/#/ 
-https://github.com/JosephAFerguson/UserInterfaceProj3/
+
+[Demo Video](/DemoVideoProj3)
