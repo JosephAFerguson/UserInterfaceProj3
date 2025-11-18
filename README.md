@@ -24,4 +24,4 @@ Please download and view Proj3Documentation.docx in root folder for easy viewing
 Public Hosting:
 https://jf-userinterfaceproj3.netlify.app/#/ 
 
-[Demo Video](DemoVideoProj3.mkv)
+[Demo Video](DemoVideoProj3.mkv) <- Will need downloaded to view
