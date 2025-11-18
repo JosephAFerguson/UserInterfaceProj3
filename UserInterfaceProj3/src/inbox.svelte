@@ -336,6 +336,7 @@
                 <div class="back" on:click={() => (selectedMessage = null)}>
                     <svg width="24" height="24" viewBox="0 0 24 24" 
                         fill="none" stroke="white" stroke-width="2">
+                        <!--AI generated-->
                         <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                 </div>
@@ -356,17 +357,19 @@
 
             <div class="msg-actions">
 
-                <button class="action-btn reply-btn">
+                <button class="action-btn reply-btn" on:click={() =>alert("Reply feature not implemented for this project.")}>
                     <svg width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
+                        <!--AI generated-->
                         <path d="M9 17l-5-5 5-5M4 12h12a4 4 0 014 4v1"/>
                     </svg>
                     Reply
                 </button>
 
-                <button class="action-btn forward-btn">
+                <button class="action-btn forward-btn"  on:click={() =>alert("Forward feature not implemented for this project.")}>
                     <svg width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
+                        <!--AI generated-->
                         <path d="M15 17l5-5-5-5M20 12H8a4 4 0 01-4-4V7"/>
                     </svg>
                     Forward
@@ -378,6 +381,7 @@
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
+                        <!--AI generated-->
                         <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6
                                  m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
                     </svg>
@@ -421,7 +425,7 @@
 .page {
     width: 100%;
     height: 100%;
-    background: #012538; 
+    background: var(--color-background-primary); 
     color: white;
     position: relative;
     overflow-y: scroll;
@@ -439,7 +443,7 @@
 .sticky-header {
     position: sticky;
     top: 0;
-    background: #012538;
+    background: var(--color-background-primary);
     z-index: 100;
     padding-bottom: 0.5rem;
 }
@@ -460,7 +464,6 @@
     padding: 0.7rem 1rem;
     border-radius: 1rem;
     border: none;
-    font-size: 1rem;
 }
 
 .massbar {
@@ -471,7 +474,6 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 1rem;
 }
 
 .select-header {

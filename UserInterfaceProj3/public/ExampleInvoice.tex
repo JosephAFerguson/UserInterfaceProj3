@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+\geometry{margin=1in}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries Example Billing Invoice - Example Month - November}\\[1em]
+    {\large Altafiber Services}\\[0.5em]
+    Date: \today
+\end{center}
+
+\vspace{1.2em}
+
+\noindent
+\textbf{Customer Information:}\\
+Name: Keanu Reeves \\
+Address: 123 Main Street, Cincinnati, OH 45202 \\
+Account Number: 0012345678 \\
+
+\vspace{1em}
+
+\textbf{Billing Period:} October 25, 2025 -- November 25, 2025 \\[0.5em]
+\textbf{Invoice Number:} INV-2025-1101
+
+\vspace{1.5em}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{ p{3in} >{\raggedleft\arraybackslash}p{1.5in} }
+\toprule
+\textbf{Description} & \textbf{Amount (USD)} \\
+\midrule
+High-Speed Fiber Internet (500 Mbps) & \$59.99 \\
+Equipment Rental (Router) & \$20.00 \\
+State and Local Taxes & \$3.57 \\
+Late Fee \& Rollovers (Previous Month) & \$26.98 \\
+\midrule
+\textbf{Total Charges} & \textbf{\$110.54} \\
+\bottomrule
+\end{longtable}
+
+\vspace{1.5em}
+
+\textbf{Amount Due:} \textbf{\$110.54} \\
+\textbf{Due Date:} November 10, 2025
+
+\vspace{2em}
+
+\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Payment Instructions:} \\
+Please make checks payable to \textit{Altafiber Services}.  
+Payments can also be made online at: \texttt{https://my.altafiber.com/billing}.
+
+\vspace{1.5em}
+
+\textbf{Customer Support:} \\
+Call: 1-800-555-1234 \\
+Email: support@altafiber.com
+
+\end{document}
